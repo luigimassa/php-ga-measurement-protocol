@@ -56,7 +56,7 @@ class AnalyticsResponse implements AnalyticsResponseInterface
             );
         }
 
-        $this->requestUrl = (string) $request->getUgetUrl();
+        $this->requestUrl = (string) $request->getUrl();
     }
 
     /**
