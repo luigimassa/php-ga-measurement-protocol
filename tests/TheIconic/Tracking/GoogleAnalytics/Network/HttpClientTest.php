@@ -2,7 +2,7 @@
 
 namespace TheIconic\Tracking\GoogleAnalytics\Network;
 
-use Psr\Http\Message\RequestInterface;
+use GuzzleHttp\Message\RequestInterface;
 
 class HttpClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,11 +30,11 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     public function testPostValidatesOptions(array $options, $exceptionMessage)
     {
         $guzzleClient = $this->getMockBuilder('GuzzleHttp\Client')
-            ->setMethods(['sendAsync'])
+            ->setMethods(['send'])
             ->disableOriginalConstructor()
             ->getMock();
 
-        $guzzleClient->expects($this->never())->method('sendAsync');
+        $guzzleClient->expects($this->never())->method('send');
         $this->httpClient->setClient($guzzleClient);
 
         $this->setExpectedException(\UnexpectedValueException::class, $exceptionMessage);
@@ -58,7 +58,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
     public function testPost()
     {
-        $mockResponse = $this->getMockBuilder('GuzzleHttp\Psr7\Response')
+        $mockResponse = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->setMethods(['getStatusCode'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -119,7 +119,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $this->mockHttpClient->setClient($guzzleClient);
 
         $response = $this->mockHttpClient->post('http://test-collector.com/collect?v=1');
-        $this->assertInstanceOf('Psr\Http\Message\ResponseInterface', $response);
+        $this->assertInstanceOf('GuzzleHttp\Message\ResponseInterface', $response);
 
         $responseAsync = $this->mockHttpClient->post(
             'http://test-collector.com/collect?v=1',

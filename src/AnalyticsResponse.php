@@ -2,8 +2,8 @@
 
 namespace TheIconic\Tracking\GoogleAnalytics;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Message\RequestInterface;
+use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Promise\PromiseInterface;
 
 /**
@@ -56,7 +56,7 @@ class AnalyticsResponse implements AnalyticsResponseInterface
             );
         }
 
-        $this->requestUrl = (string) $request->getUri();
+        $this->requestUrl = (string) $request->getUgetUrl();
     }
 
     /**

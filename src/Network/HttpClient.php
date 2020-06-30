@@ -4,11 +4,11 @@ namespace TheIconic\Tracking\GoogleAnalytics\Network;
 
 use TheIconic\Tracking\GoogleAnalytics\AnalyticsResponse;
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Message\Request;
 use GuzzleHttp\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Message\RequestInterface;
+use GuzzleHttp\Message\ResponseInterface;
 
 /**
  * Class HttpClient
@@ -48,7 +48,7 @@ class HttpClient
      */
     public function __destruct()
     {
-        Promise\unwrap(self::$promises);
+        //Promise\unwrap(self::$promises);
     }
 
     /**
@@ -95,7 +95,7 @@ class HttpClient
         );
 
         $opts = $this->parseOptions($options);
-        $response = $this->getClient()->sendAsync($request, [
+        $response = $this->getClient()->send($request, [
             'synchronous' => !$opts['async'],
             'timeout' => $opts['timeout'],
             'connect_timeout' => $opts['timeout'],

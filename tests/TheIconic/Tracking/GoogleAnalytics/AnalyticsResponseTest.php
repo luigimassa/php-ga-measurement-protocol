@@ -2,8 +2,8 @@
 
 namespace TheIconic\Tracking\GoogleAnalytics;
 
-use GuzzleHttp\Psr7\Uri;
-use Psr\Http\Message\RequestInterface;
+use GuzzleHttp\Message\Uri;
+use GuzzleHttp\Message\RequestInterface;
 
 class AnalyticsResponseTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,7 +29,7 @@ class AnalyticsResponseTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $mockResponse = $this->getMockBuilder('GuzzleHttp\Psr7\Response')
+        $mockResponse = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->setMethods(['getStatusCode', 'getBody'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -38,7 +38,7 @@ class AnalyticsResponseTest extends \PHPUnit_Framework_TestCase
             ->method('getStatusCode')
             ->will($this->returnValue('200'));
 
-        $invalidBodyMock = $this->getMockBuilder('Psr\Http\Message\StreamInterface')
+        $invalidBodyMock = $this->getMockBuilder('GuzzleHttp\Message\StreamInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -50,7 +50,7 @@ class AnalyticsResponseTest extends \PHPUnit_Framework_TestCase
             ->method('getBody')
             ->will($this->returnValue($invalidBodyMock));
 
-        $this->mockRequest = $this->getMockBuilder('GuzzleHttp\Psr7\Request')
+        $this->mockRequest = $this->getMockBuilder('GuzzleHttp\Message\Request')
             ->setMethods(['getUri'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -69,7 +69,7 @@ class AnalyticsResponseTest extends \PHPUnit_Framework_TestCase
         $this->analyticsResponseAsync = new AnalyticsResponse($this->mockRequest, $mockResponseAsync);
 
 
-        $mockDebugResponse = $this->getMockBuilder('GuzzleHttp\Psr7\Response')
+        $mockDebugResponse = $this->getMockBuilder('GuzzleHttp\Message\Response')
             ->setMethods(['getStatusCode', 'getBody'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -78,7 +78,7 @@ class AnalyticsResponseTest extends \PHPUnit_Framework_TestCase
             ->method('getStatusCode')
             ->will($this->returnValue('200'));
 
-        $bodyMock = $this->getMockBuilder('Psr\Http\Message\StreamInterface')
+        $bodyMock = $this->getMockBuilder('GuzzleHttp\Message\StreamInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
