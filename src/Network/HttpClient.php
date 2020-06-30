@@ -103,9 +103,7 @@ class HttpClient
 
         if ($opts['async']) {
             self::$promises[] = $response;
-        } else {
-            $response = $response->wait();
-        }
+        } 
 
         return $this->getAnalyticsResponse($request, $response);
     }

@@ -51,9 +51,10 @@ class AnalyticsResponseTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($invalidBodyMock));
 
         $this->mockRequest = $this->getMockBuilder('GuzzleHttp\Message\Request')
-            ->setMethods(['getUri'])
+            ->setMethods(['getUri', 'getContents'])
             ->disableOriginalConstructor()
             ->getMock();
+            
 
         $this->mockRequest->expects($this->atLeast(1))
             ->method('getUri')
